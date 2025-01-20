@@ -6,20 +6,24 @@ import { twMerge } from "tailwind-merge";
 export function Sidebar() {
   return (
     <>
-      <aside className="sticky top-0 overflow-y-auto scrollbar-hidden pb-4 flex flex-col ml-1 lg:hidden">
+      <aside
+        className={`sticky top-0 overflow-y-auto pb-4 flex flex-col ml-1 `}
+      >
         <SmallsidebarItems Icon={Home} tittle="Home" url="/" />
         <SmallsidebarItems Icon={Banknote} tittle="Subscription" url="/" />
         <SmallsidebarItems Icon={Link} tittle="Tweet" url="/" />
         <SmallsidebarItems Icon={NotebookText} tittle="Document" url="/" />
       </aside>
 
-      <aside className="w-40 lg:sticky absolute top-0 overflow-y-auto scrollbar-hidden pb-4 flex-col gap-4 pl-4 lg:flex hidden">
+      {/* <aside
+        className={`w-40 lg:sticky absolute top-0 overflow-y-auto pb-4 flex flex-col gap-4 pl-4 md:hidden`}
+      >
         <LargesidebarSection>
           <LargesidebarItems isActive Icon={Home} tittle="Home" url="/" />
           <LargesidebarItems Icon={Home} tittle="Home" url="/" />
           <LargesidebarItems Icon={Home} tittle="Home" url="/" />
         </LargesidebarSection>
-      </aside>
+      </aside> */}
     </>
   );
 }
