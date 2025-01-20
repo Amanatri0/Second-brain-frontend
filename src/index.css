@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  @apply bg-transparent w-2;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary-text rounded-full;
+}
+
+.scroll-hidden::-webkit-scrollbar-thumb {
+  @apply bg-transparent;
+}
+
+.scroll-hidden:hover:-webkit-scrollbar-thumb {
+  @apply bg-secondary-border;
+}
