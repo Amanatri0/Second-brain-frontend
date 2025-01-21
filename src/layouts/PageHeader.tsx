@@ -1,38 +1,54 @@
-import { ArrowLeft, Menu, Plus, Search, Share2 } from "lucide-react";
+import { ArrowLeft, Menu, Plus, Search, Share2, X } from "lucide-react";
 import { Button } from "../components/Button";
 import { useState } from "react";
 
 // header bar for second brain
 export function PageHeader() {
   const [showSeacrh, setShowSearch] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="flex gap-10 lg:gap-20 justify-between items-center pt-2 mb-6 mx-4">
       {/* buttons Section-1 left side */}
       <div
-        className={`gap-4 items-center flex-shrink-0  ${
+        className={`gap-4 items-center flex-shrink-0 lg:ml-32 block ${
           showSeacrh ? "hidden" : "flex"
         }`}
       >
-        <Button variant={"ghost"} size={"icon"}>
-          <Menu />
-        </Button>
-        <a href="/" className="flex">
-          <img
-            className="w-8 h-7"
-            src="https://media.printables.com/media/prints/839233/images/6464341_dc80c701-6104-409c-b0d7-1935d829c62a_6b44e161-112e-4ae2-83b2-e66edafe1511/thumbs/inside/320x240/png/mozek.webp"
-            alt="Brain"
+        <Button className="lg:hidden" variant={"ghost"} size={"icon"}>
+          <Menu
+            className={`cursor-pointer transition-all lg:hidden ${
+              isOpen ? "hidden" : "block"
+            }`}
+            onClick={() => setIsOpen(true)}
           />
-          <span className="text-sky-700 pl-1">
+          <div
+            className={`fixed flex justify-end top-0 left-0 h-full w-40 rounded-r-lg  shadow-inner shadow-secondary-text bg-neutral-100 transition-transform duration-500 ease-in-out z-[999] lg:hidden  ${
+              isOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            <X
+              className="cursor-pointer m-2 mt-3 hover:rounded-full hover:bg-slate-900 hover:text-secondary w-7 h-7  "
+              onClick={() => setIsOpen(false)}
+            />
+          </div>
+        </Button>
+        <span className="text-sky-700 text-2xl flex flex-shrink">
+          <a href="/" className="flex items-center ">
+            <img
+              className={`w-14 h-12`}
+              src="https://media.printables.com/media/prints/839233/images/6464341_dc80c701-6104-409c-b0d7-1935d829c62a_6b44e161-112e-4ae2-83b2-e66edafe1511/thumbs/inside/320x240/png/mozek.webp"
+              alt="Brain"
+            />
             <b>Second Brain</b>
-          </span>
-        </a>
+          </a>
+        </span>
       </div>
 
       {/* SearchBar section-2 middle part */}
       <form
-        className={` gap-4 flex-grow justify-center ${
-          showSeacrh ? "flex" : "hidden md:flex"
+        className={` gap-1 flex-grow justify-center items-center ${
+          showSeacrh ? "flex" : "hidden sm:flex"
         } `}
       >
         {showSeacrh && (
@@ -42,10 +58,10 @@ export function PageHeader() {
             variant={"ghost"}
             className="mt-1 "
           >
-            <ArrowLeft className="w-5 h-5 " />
+            <ArrowLeft className="w-7 h-7 " />
           </Button>
         )}
-        <div className="flex flex-grow max-w-[500px] max-h-[50px] py-2 ">
+        <div className="flex flex-grow max-w-[500px] max-h-[50px] ">
           <input
             type="search"
             placeholder="Search"
@@ -58,7 +74,9 @@ export function PageHeader() {
       </form>
 
       {/* Buttons section-3  right side*/}
-      <div className={`flex-shrink-0 ${showSeacrh ? "hidden" : "flex"}`}>
+      <div
+        className={`flex-shrink-0 lg:mr-14 ${showSeacrh ? "hidden" : "flex"}`}
+      >
         <Button
           onClick={() => setShowSearch(true)}
           size={"icon"}
