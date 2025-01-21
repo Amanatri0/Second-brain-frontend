@@ -7,7 +7,7 @@ export function Sidebar() {
   return (
     <>
       <aside
-        className={`sticky top-0 overflow-y-auto pb-4  flex-col ml-1 hidden lg:flex `}
+        className={`flex-shrink sticky top-0 overflow-y-auto pb-4 flex-col ml-1 hidden lg:flex `}
       >
         <SmallsidebarItems Icon={Home} tittle="Home" url="/" />
         <SmallsidebarItems Icon={Banknote} tittle="Subscription" url="/" />

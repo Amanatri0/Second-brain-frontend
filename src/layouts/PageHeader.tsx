@@ -8,7 +8,7 @@ export function PageHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex gap-10 lg:gap-20 justify-between items-center pt-2 mb-6 mx-4">
+    <div className=" flex gap-10 lg:gap-20 justify-between items-center pt-2 mb-6 mx-4">
       {/* buttons Section-1 left side */}
       <div
         className={`gap-4 items-center flex-shrink-0 lg:ml-32 block ${
@@ -17,13 +17,13 @@ export function PageHeader() {
       >
         <Button className="lg:hidden" variant={"ghost"} size={"icon"}>
           <Menu
-            className={`cursor-pointer transition-all lg:hidden ${
+            className={`cursor-pointer transition-all  ${
               isOpen ? "hidden" : "block"
             }`}
             onClick={() => setIsOpen(true)}
           />
           <div
-            className={`fixed flex justify-end top-0 left-0 h-full w-40 rounded-r-lg  shadow-inner shadow-secondary-text bg-neutral-100 transition-transform duration-500 ease-in-out z-[999] lg:hidden  ${
+            className={`fixed flex justify-end top-0 left-0 h-full w-40 rounded-r-lg  shadow-inner shadow-secondary-text bg-neutral-100 transition-transform duration-500 ease-in-out z-[999] ${
               isOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
@@ -33,10 +33,10 @@ export function PageHeader() {
             />
           </div>
         </Button>
-        <span className="text-sky-700 text-2xl flex flex-shrink">
-          <a href="/" className="flex items-center ">
+        <span className="text-sky-700 flex">
+          <a href="/" className="flex items-center text-2xl space-x-2">
             <img
-              className={`w-14 h-12`}
+              className={`size-12`}
               src="https://media.printables.com/media/prints/839233/images/6464341_dc80c701-6104-409c-b0d7-1935d829c62a_6b44e161-112e-4ae2-83b2-e66edafe1511/thumbs/inside/320x240/png/mozek.webp"
               alt="Brain"
             />
@@ -47,8 +47,8 @@ export function PageHeader() {
 
       {/* SearchBar section-2 middle part */}
       <form
-        className={` gap-1 flex-grow justify-center items-center ${
-          showSeacrh ? "flex" : "hidden sm:flex"
+        className={` gap-1 flex-grow justify-center items-center  ${
+          showSeacrh ? "flex" : "hidden md:flex"
         } `}
       >
         {showSeacrh && (
@@ -58,10 +58,10 @@ export function PageHeader() {
             variant={"ghost"}
             className="mt-1 "
           >
-            <ArrowLeft className="w-7 h-7 " />
+            <ArrowLeft className="size-7 " />
           </Button>
         )}
-        <div className="flex flex-grow max-w-[500px] max-h-[50px] ">
+        <div className="flex flex-grow lg:max-w-[600px] max-h-[50px] ">
           <input
             type="search"
             placeholder="Search"
