@@ -1,11 +1,17 @@
 import { ArrowLeft, Menu, Plus, Search, Share2, X } from "lucide-react";
 import { Button } from "../components/Button";
 import { useState } from "react";
+import { Modal } from "../components/PopupModal";
 
 // header bar for second brain
 export function PageHeader() {
   const [showSeacrh, setShowSearch] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  function openTheModal() {
+    setModalOpen(true);
+  }
 
   return (
     <div className=" flex gap-10 lg:gap-20 justify-between items-center pt-2 mb-6 mx-4">
@@ -88,9 +94,12 @@ export function PageHeader() {
         <Button size={"icon"} variant={"ghost"}>
           <Share2 />
         </Button>
-        <Button size={"icon"} variant={"ghost"}>
-          <Plus />
-        </Button>
+        <div>
+          <Modal open={modalOpen} onClose={() => setModalOpen(false)} />
+          <Button onClick={openTheModal} size={"icon"} variant={"ghost"}>
+            <Plus />
+          </Button>
+        </div>
       </div>
     </div>
   );

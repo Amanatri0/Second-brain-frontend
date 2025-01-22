@@ -1,4 +1,3 @@
-import { Modal } from "./components/PopupModal";
 import { Sidebar } from "./components/SideBar";
 import { VideoGridItems } from "./components/VideGridItems";
 import { videos } from "./data/data";
@@ -7,7 +6,6 @@ import { PageHeader } from "./layouts/PageHeader";
 export default function App() {
   return (
     <>
-      <Modal />
       <div className="max-h-screen flex flex-col justify-center">
         <PageHeader />
         <div className="grid grid-cols-[auto,1fr] overflow-auto ">
