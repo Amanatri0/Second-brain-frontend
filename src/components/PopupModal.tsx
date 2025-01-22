@@ -1,12 +1,54 @@
-import { Beer, Link, Mail, X } from "lucide-react";
-import { SignupInput } from "../SignupPage/SignupInputs";
+import { Link, Mail, X } from "lucide-react";
+import { Inputstyle } from "../SignupPage/InputsStyle";
+import { useRef, useState } from "react";
+import axios from "axios";
+import { BACKEND_URL } from "../env";
 
 type ModalProps = {
   open?: boolean;
   onClose?: () => void;
 };
 
+enum ContentType {
+  Youtube = "Youtube",
+  Twitter = "Twitter",
+  Instagram = "Instagram",
+  Documentation = "Documentation",
+  Others = "Others",
+}
+
 export function Modal({ open, onClose }: ModalProps) {
+  const tittleRef = useRef<HTMLInputElement>();
+  const linksRef = useRef<HTMLInputElement>();
+
+  const [type, setType] = useState(ContentType.Youtube);
+
+  async function content() {
+    const title = tittleRef.current?.value;
+
+    const link = linksRef.current?.value;
+
+    try {
+      await axios.post(
+        `${BACKEND_URL}/content/created`,
+        {
+          title,
+          link,
+          type,
+        },
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      alert("Content posted");
+    } catch (error) {
+      console.error("Cannot post the conent", error);
+    }
+  }
+
   return (
     <>
       {open && (
@@ -23,17 +65,15 @@ export function Modal({ open, onClose }: ModalProps) {
             </div>
 
             <div className="space-y-4 flex flex-col">
-              <SignupInput
+              <Inputstyle
+                reference={tittleRef}
                 icon={<Mail />}
                 placeholder={"Tittle"}
                 type={"text"}
               />
-              <SignupInput
-                icon={<Beer />}
-                placeholder={"Types"}
-                type={"text"}
-              />
-              <SignupInput
+              {/* <Inputstyle icon={<Beer />} placeholder={"Types"} type={"text"} /> */}
+              <Inputstyle
+                reference={linksRef}
                 icon={<Link />}
                 placeholder={"links"}
                 type={"link"}
@@ -42,16 +82,29 @@ export function Modal({ open, onClose }: ModalProps) {
 
             <div>
               <select className="p-2 rounded-xl w-36 border-2 border-gray-500 cursor-pointer transition ease-in duration-300 hover:-translate-y-0.5 hover:bg-yellow-300 hover:shadow-xl ">
-                <option value="">Youtube</option>
-                <option value="">Twitter</option>
-                <option value="">Instagram</option>
-                <option value="">Documents</option>
-                <option value="">Others</option>
+                <option onClick={() => setType(ContentType.Youtube)} value="">
+                  Youtube
+                </option>
+                <option onClick={() => setType(ContentType.Twitter)} value="">
+                  Twitter
+                </option>
+                <option onClick={() => setType(ContentType.Instagram)} value="">
+                  Instagram
+                </option>
+                <option
+                  onClick={() => setType(ContentType.Documentation)}
+                  value=""
+                >
+                  Documents
+                </option>
+                <option onClick={() => setType(ContentType.Others)} value="">
+                  Others
+                </option>
               </select>
             </div>
             <div className="flex justify-center">
               <button
-                onClick={onClose}
+                onClick={content}
                 className=" bg-indigo-500 py-2.5 px-9 rounded-md transition ease-in-out border-2 focus:ring-2 duration-300 hover:-translate-y-1 hover:shadow-xl "
               >
                 Submit
