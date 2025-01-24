@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { buttonsStyle } from "./buttonSize";
 
 type ButtonProps = {
-  variant?: "default" | "ghost" | null | undefined;
+  variant: "default" | "ghost" | null | undefined;
   size?: "default" | "icon" | null | undefined;
 } & ComponentProps<"button">;
 

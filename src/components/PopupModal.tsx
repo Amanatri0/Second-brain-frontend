@@ -1,6 +1,6 @@
-import { Link, Mail, X } from "lucide-react";
+import { Link, Mail, Text, X } from "lucide-react";
 import { Inputstyle } from "../SignupPage/InputsStyle";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../env";
 
@@ -9,24 +9,26 @@ type ModalProps = {
   onClose?: () => void;
 };
 
-enum ContentType {
-  Youtube = "Youtube",
-  Twitter = "Twitter",
-  Instagram = "Instagram",
-  Documentation = "Documentation",
-  Others = "Others",
-}
+// enum ContentType {
+//   Youtube = "Youtube",
+//   Twitter = "Twitter",
+//   Instagram = "Instagram",
+//   Documentation = "Documentation",
+//   Others = "Others",
+// }
 
 export function Modal({ open, onClose }: ModalProps) {
   const tittleRef = useRef<HTMLInputElement>();
   const linksRef = useRef<HTMLInputElement>();
+  const textRef = useRef<HTMLInputElement>();
 
-  const [type, setType] = useState(ContentType.Youtube);
+  // const [type, setType] = useState(ContentType);
 
   async function content() {
     const title = tittleRef.current?.value;
 
     const link = linksRef.current?.value;
+    const text = textRef.current?.value;
 
     try {
       await axios.post(
@@ -34,7 +36,8 @@ export function Modal({ open, onClose }: ModalProps) {
         {
           title,
           link,
-          type,
+          // type,
+          text,
         },
         {
           headers: {
@@ -71,36 +74,25 @@ export function Modal({ open, onClose }: ModalProps) {
                 placeholder={"Tittle"}
                 type={"text"}
               />
-              {/* <Inputstyle icon={<Beer />} placeholder={"Types"} type={"text"} /> */}
               <Inputstyle
                 reference={linksRef}
                 icon={<Link />}
                 placeholder={"links"}
                 type={"link"}
               />
+              <Inputstyle
+                reference={textRef}
+                icon={<Text />}
+                placeholder={"Text"}
+                type={"text"}
+              />
             </div>
 
             <div>
-              <select className="p-2 rounded-xl w-36 border-2 border-gray-500 cursor-pointer transition ease-in duration-300 hover:-translate-y-0.5 hover:bg-yellow-300 hover:shadow-xl ">
-                <option onClick={() => setType(ContentType.Youtube)} value="">
-                  Youtube
-                </option>
-                <option onClick={() => setType(ContentType.Twitter)} value="">
-                  Twitter
-                </option>
-                <option onClick={() => setType(ContentType.Instagram)} value="">
-                  Instagram
-                </option>
-                <option
-                  onClick={() => setType(ContentType.Documentation)}
-                  value=""
-                >
-                  Documents
-                </option>
-                <option onClick={() => setType(ContentType.Others)} value="">
-                  Others
-                </option>
-              </select>
+              <input
+                type="file"
+                className="p-2 rounded-xl w-36 border-2 border-gray-500 cursor-pointer transition ease-in duration-300 hover:-translate-y-0.5 hover:bg-yellow-300 hover:shadow-xl "
+              />
             </div>
             <div className="flex justify-center">
               <button
