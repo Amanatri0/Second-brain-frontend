@@ -1,4 +1,5 @@
 // import { Cardgrid } from "./components/Cardgrid";
+// import { Cardgrid } from "./components/Cardgrid";
 import Dashboard from "./dashBoard/dashboard";
 import { LoginPage } from "./SignupPage/LoginPage";
 import { SignupPage } from "./SignupPage/SignupPage";
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
+      {/* <Cardgrid /> */}
     </>
   );
 }

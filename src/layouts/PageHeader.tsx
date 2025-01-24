@@ -9,10 +9,6 @@ export function PageHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  function openTheModal() {
-    setModalOpen(true);
-  }
-
   return (
     <div className=" flex gap-10 lg:gap-20 justify-between items-center pt-2 mb-6 mx-4">
       {/* buttons Section-1 left side */}
@@ -96,7 +92,11 @@ export function PageHeader() {
         </Button>
         <div>
           <Modal open={modalOpen} onClose={() => setModalOpen(false)} />
-          <Button onClick={openTheModal} size={"icon"} variant={"ghost"}>
+          <Button
+            onClick={() => setModalOpen(true)}
+            size={"icon"}
+            variant={"ghost"}
+          >
             <Plus />
           </Button>
         </div>

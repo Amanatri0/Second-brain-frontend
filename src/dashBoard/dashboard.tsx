@@ -6,6 +6,7 @@ import { PageHeader } from "../layouts/PageHeader";
 
 export default function Dashboard() {
   const content = ContentData();
+  console.log(content._id);
 
   return (
     <>
@@ -15,7 +16,7 @@ export default function Dashboard() {
           <Sidebar />
           <div className="overflow-x-hidden px-4 pb-4">
             <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(400px,1fr))] ">
-              {/* {JSON.stringify(content)} */}
+              {JSON.stringify(content)}
               {content.map((content) => (
                 <Cardgrid title={content.title} text={content.text} />
               ))}

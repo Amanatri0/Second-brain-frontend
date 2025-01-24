@@ -1,4 +1,4 @@
-import { Link, Mail, Text, X } from "lucide-react";
+import { File, Link, Mail, Text, X } from "lucide-react";
 import { Inputstyle } from "../SignupPage/InputsStyle";
 import { useRef } from "react";
 import axios from "axios";
@@ -21,6 +21,7 @@ export function Modal({ open, onClose }: ModalProps) {
   const tittleRef = useRef<HTMLInputElement>();
   const linksRef = useRef<HTMLInputElement>();
   const textRef = useRef<HTMLInputElement>();
+  const typeRef = useRef<HTMLInputElement>();
 
   // const [type, setType] = useState(ContentType);
 
@@ -29,6 +30,7 @@ export function Modal({ open, onClose }: ModalProps) {
 
     const link = linksRef.current?.value;
     const text = textRef.current?.value;
+    const type = typeRef.current?.value;
 
     try {
       await axios.post(
@@ -36,7 +38,7 @@ export function Modal({ open, onClose }: ModalProps) {
         {
           title,
           link,
-          // type,
+          type,
           text,
         },
         {
@@ -86,14 +88,20 @@ export function Modal({ open, onClose }: ModalProps) {
                 placeholder={"Text"}
                 type={"text"}
               />
+              <Inputstyle
+                reference={typeRef}
+                icon={<File />}
+                placeholder={"Text"}
+                type={"file"}
+              />
             </div>
 
-            <div>
+            {/* <div>
               <input
                 type="file"
                 className="p-2 rounded-xl w-36 border-2 border-gray-500 cursor-pointer transition ease-in duration-300 hover:-translate-y-0.5 hover:bg-yellow-300 hover:shadow-xl "
               />
-            </div>
+            </div> */}
             <div className="flex justify-center">
               <button
                 onClick={content}
